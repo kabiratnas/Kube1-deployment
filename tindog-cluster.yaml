@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tindog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tindog
+  template:
+    metadata:
+      labels:
+        app: tindog
+    spec:
+      containers:
+        - name: tindog
+          image: kabiratnas/tindog:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tindog-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: tindog
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

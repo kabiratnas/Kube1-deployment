@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: my-eks-cluster
+  region: us-west-2  # Change the region as needed
+
+nodeGroups:
+  - name: worker-nodes
+    instanceType: t3.medium  # You can adjust instance type as needed
+    desiredCapacity: 4
+    minSize: 4
+    maxSize: 4
+    iam:
+      withAddonPolicies:
+        imageBuilder: true  # You can add other necessary IAM policies based
